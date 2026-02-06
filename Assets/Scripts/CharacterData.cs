@@ -1,4 +1,5 @@
 using Doublsb.Dialog;
+using Lean.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -83,8 +84,8 @@ public class CharacterData : MonoBehaviour
         {
             dialogTexts.Add(new DialogData(message, this.characterName));
         }*/
-        DialogData dialogData = new DialogData($"/color:red/{this.characterName} parece {GameGenerationRules.GetEmotionalStateString(this.emotionalState, characterName)}.", this.characterName);
-        dialogData.SelectList.Add("Alibi", "Onde você estava?");
+        DialogData dialogData = new DialogData($"/color:red/{this.characterName} {LeanLocalization.GetTranslationText("Emotion/BaseText")} {GameGenerationRules.GetEmotionalStateString(this.emotionalState, characterName)}.", this.characterName);
+        dialogData.SelectList.Add("Alibi", LeanLocalization.GetTranslationText("Alibi/Question"));
         dialogData.SelectList.Add("Opiniao", "O que você acha dos outros?");
         dialogData.Callback = () => CheckOption();
         dialogTexts.Add(dialogData);
@@ -127,7 +128,7 @@ public class CharacterData : MonoBehaviour
 
     string GetGeneralAlibi()
     {
-        return $"Eu estava {GameGenerationRules.GetAlibiString(this.alibi)}.";
+        return $"{LeanLocalization.GetTranslationText("Alibi/BaseText")} {GameGenerationRules.GetAlibiString(this.alibi)}.";
     }
 
     string GetAlibiCharacters(List<string> characterNames, bool positive = true, bool nominal = true)

@@ -1,3 +1,4 @@
+using Lean.Localization;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -95,38 +96,17 @@ public static class GameGenerationRules
     public static int maxAlibis = 3;
     public static string GetAlibiString(Alibi alibi)
     {
-        switch (alibi)
-        {
-            case Alibi.SalaoPrincipal:
-                return "no Salão Principal";
-            case Alibi.SalaDeDanca:
-                return "na Sala de Dança";
-            case Alibi.SalaDeMusica:
-                return "na Sala de Música";
-            case Alibi.Jardim:
-                return "no Jardim";
-            case Alibi.Banheiro:
-                return "no Banheiro";
-            case Alibi.Cozinha:
-                return "na Cozinha";
-            case Alibi.HallDeEntrada:
-                return "no Hall de Entrada";
-            case Alibi.QuartoDeHospede:
-                return "no Quarto de Hóspede";
-            case Alibi.QuartoPrincipal:
-                return "no Quarto Principal";
-            case Alibi.Biblioteca:
-                return "na Biblioteca";
-            case Alibi.Adega:
-                return "na Adega";
-            default:
-                return "em algum lugar desconhecido";
-        }
+        return LeanLocalization.GetTranslationText("Alibi/" + alibi.ToString());
     }
 
+    public static string GetEmotionalStateToStringM(EmotionalState emotionalState)
+    {
+        return LeanLocalization.GetTranslationText("Emotion/" + emotionalState.ToString() + "M");
+    }
+    /*
     static Dictionary<EmotionalState, string> EmotionalStateToStringM = new Dictionary<EmotionalState, string>()
     {
-        { EmotionalState.Resoluto, "resoluto" },
+        { EmotionalState.Resoluto,  },
         { EmotionalState.Impaciente, "impaciente" },
         { EmotionalState.Enfurecido, "enfurecido" },
         { EmotionalState.Perturbado, "perturbado" },
@@ -135,8 +115,13 @@ public static class GameGenerationRules
         { EmotionalState.Amedrontado, "amedrontado" },
         { EmotionalState.Atonito, "atônito" },
         { EmotionalState.Aliviado, "aliviado"}
-    };
+    };*/
 
+    public static string GetEmotionalStateToStringF(EmotionalState emotionalState)
+    {
+        return LeanLocalization.GetTranslationText("Emotion/" + emotionalState.ToString() + "F");
+    }
+    /*
     static Dictionary<EmotionalState, string> EmotionalStateToStringF = new Dictionary<EmotionalState, string>()
     {
         { EmotionalState.Resoluto, "resoluta" },
@@ -149,16 +134,16 @@ public static class GameGenerationRules
         { EmotionalState.Atonito, "atônita" },
         { EmotionalState.Aliviado, "aliviada"}
     };
-
+    */
     public static string GetEmotionalStateString(EmotionalState emotionalState, string characterName)
     {
         if (characterName == "Regnum" || characterName == "Solaris")
         {
-            return EmotionalStateToStringM[emotionalState];
+            return GetEmotionalStateToStringM(emotionalState);
         }
         else
         {
-            return EmotionalStateToStringF[emotionalState];
+            return GetEmotionalStateToStringF(emotionalState);
         }
     }
 
