@@ -1,3 +1,4 @@
+using Lean.Localization;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -77,14 +78,14 @@ public class SuspectBoard : MonoBehaviour
     public void WinRoutine()
     {
         EndingRoutine();
-        endingText.text = "ACERTOU, MISERAVI!";
+        endingText.text = LeanLocalization.GetTranslationText("Main/Board/Acertou");
         Debug.Log("YOU WON!");
     }
 
     public void LoseRoutine()
     {
         EndingRoutine();
-        endingText.text = "VOCÊ ERROU!!";
+        endingText.text = LeanLocalization.GetTranslationText("Main/Board/Errou");
         Debug.Log("YOU DIED!");
     }
 }

@@ -1,3 +1,4 @@
+using Lean.Localization;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,7 +30,7 @@ public class CharacterThumbnail : MonoBehaviour
         }
         else
         {
-            this.alibiText.text = $"Encontrado sem vida {GameGenerationRules.GetAlibiString(characterData.alibi)}.";
+            this.alibiText.text = $"{LeanLocalization.GetTranslationText("Alibi/DeadText")} {GameGenerationRules.GetAlibiString(characterData.alibi)}.";
         }
     }
 

@@ -187,55 +187,55 @@ public static class GameGenerationRules
 
     static List<string> positiveOpinionsString = new List<string>()
     {
-        "{CHARACTER} é gentil com todos.",
-        "Eu confio completamente em {CHARACTER}.",
-        "Jamais ouvi falarem mal de {CHARACTER}.",
-        "{CHARACTER} jamais faria uma coisa dessas.",
-        "Conheço {CHARACTER} desde a infância, não é uma pessoa ruim."
+        LeanLocalization.GetTranslationText("Opinion/Base/Positive/Gentil"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Positive/Confio"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Positive/NOuviMal"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Positive/JamaisFaria"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Positive/ConhecoDesdeInfancia")
     };
 
     static List<string> neutralOpinionsString = new List<string>()
     {
-        "Não conheço {CHARACTER} pessoalmente.",
-        "Não tenho como opinar sobre {CHARACTER}.",
-        "{CHARACTER} tem uma vida bastante privada.",
-        "{CHARACTER} sempre foi bastante independente.",
-        "Eu e {CHARACTER} não fazemos parte do mesmo círculo de amizades."
+        LeanLocalization.GetTranslationText("Opinion/Base/Neutral/NaoConheco"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Neutral/NaoOpinar"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Neutral/VidaPrivada"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Neutral/Independente"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Neutral/CirculoAmizades")
     };
 
 
     static List<string> negativeOpinionsString = new List<string>()
     {
-        "{CHARACTER} é uma péssima pessoa.",
-        "Não confio nem um pouco em {CHARACTER}.",
-        "Só escuto falarem mal de {CHARACTER}.",
-        "Não me surpreenderia se {CHARACTER} for culpado.",
-        "Não gosto de {CHARACTER} desde a infância."
+        LeanLocalization.GetTranslationText("Opinion/Base/Negative/PessimaPessoa"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Negative/NaoConfio"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Negative/FalaMal"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Negative/SurpresoCulpado"),
+        LeanLocalization.GetTranslationText("Opinion/Base/Negative/NaoGostoDesdeInfancia")
     };
 
     static List<string> positiveOpinionsDeadString = new List<string>()
     {
-        "{CHARACTER} era gentil com todos.",
-        "Eu não acredito que {CHARACTER} se foi.",
-        "Quem faria uma coisa dessas com {CHARACTER}.",
-        "Conhecia {CHARACTER} desde a infância, não era sua hora."
+        LeanLocalization.GetTranslationText("Opinion/Dead/Positive/Gentil"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Positive/SeFoi"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Positive/QuemFaria"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Positive/ConheciaDesdeInfancia")
     };
 
     static List<string> neutralOpinionsDeadString = new List<string>()
     {
-        "Não conheci {CHARACTER} pessoalmente.",
-        "Não tenho como opinar sobre {CHARACTER}.",
-        "{CHARACTER} tinha uma vida bastante privada.",
-        "Eu e {CHARACTER} não fazíamos parte do mesmo círculo de amizades."
+        LeanLocalization.GetTranslationText("Opinion/Dead/Neutral/NaoConheci"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Neutral/NaoOpinar"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Neutral/VidaPrivada"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Neutral/CirculoAmizades")
     };
 
 
     static List<string> negativeOpinionsDeadString = new List<string>()
     {
-        "{CHARACTER} era uma péssima pessoa.",
-        "Não confiava nem um pouco em {CHARACTER}.",
-        "Falavam tão mal de {CHARACTER} que uma hora isso ia acontecer.",
-        "Não gosto de {CHARACTER} desde a infância."
+        LeanLocalization.GetTranslationText("Opinion/Dead/Negative/PessimaPessoa"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Negative/NaoConfiava"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Negative/FalaMal"),
+        LeanLocalization.GetTranslationText("Opinion/Dead/Negative/NaoGostoDesdeInfancia")
     };
 
     static Dictionary<Opinion, List<string>> opinionStringDict = new Dictionary<Opinion, List<string>>()

@@ -20,10 +20,12 @@ public class CharacterData : MonoBehaviour
     public List<string> opinionMessages;
     public bool revealedAlibi;
     public bool revealedOpinions;
+    string genderString;
 
     public CharacterData(string characterName, Role role, EmotionalState emotionalState, Alibi alibi)
     {
         this.characterName = characterName;
+        this.genderString = (characterName == "Regnum" || characterName == "Solaris") ? "M" : "F";
         this.role = role;
         this.emotionalState = emotionalState;
         this.alibi = alibi;
@@ -86,7 +88,7 @@ public class CharacterData : MonoBehaviour
         }*/
         DialogData dialogData = new DialogData($"/color:red/{this.characterName} {LeanLocalization.GetTranslationText("Emotion/BaseText")} {GameGenerationRules.GetEmotionalStateString(this.emotionalState, characterName)}.", this.characterName);
         dialogData.SelectList.Add("Alibi", LeanLocalization.GetTranslationText("Alibi/Question"));
-        dialogData.SelectList.Add("Opiniao", "O que você acha dos outros?");
+        dialogData.SelectList.Add("Opiniao", LeanLocalization.GetTranslationText("Opinion/Question"));
         dialogData.Callback = () => CheckOption();
         dialogTexts.Add(dialogData);
         return dialogTexts;
@@ -137,17 +139,17 @@ public class CharacterData : MonoBehaviour
         {
             if (characterNames.Count == 0)
             {
-                return $"Eu estava sozinho.";
+                return LeanLocalization.GetTranslationText($"Alibi/Answer/Alone{this.genderString}");
             }
             else if (characterNames.Count == 1)
             {
                 if (nominal)
                 { 
-                    return $"Eu vi {characterNames[0]}.";
+                    return $"{LeanLocalization.GetTranslationText("Alibi/Answer/Base")} {characterNames[0]}.";
                 }
                 else
                 {
-                    return $"Eu vi uma pessoa.";
+                    return $"{LeanLocalization.GetTranslationText("Alibi/Answer/ViUmaPessoa")}.";
                 }
             }
             else
@@ -155,7 +157,7 @@ public class CharacterData : MonoBehaviour
                 string message = "";
                 if (nominal)
                 {
-                    message = $"Eu vi ";
+                    message = LeanLocalization.GetTranslationText("Alibi/Answer/Base");
                     for (int i = 0; i < characterNames.Count; i++)
                     {
                         if (i != characterNames.Count - 1)
@@ -164,14 +166,14 @@ public class CharacterData : MonoBehaviour
                         }
                         else
                         {
-                            message += $"e {characterNames[i]}.";
+                            message += $"{LeanLocalization.GetTranslationText("Generic/E")} {characterNames[i]}.";
                         }
                     }
                     return message;
                 }
                 else
                 {
-                    return $"Eu vi {characterNames.Count} pessoas.";
+                    return $"{LeanLocalization.GetTranslationText("Alibi/Answer/Base")} {characterNames.Count} {LeanLocalization.GetTranslationText("Alibi/Answer/Pessoas")}.";
                 }
                 
             }
@@ -180,15 +182,15 @@ public class CharacterData : MonoBehaviour
         {
             if (characterNames.Count == 0)
             {
-                return $"Eu não vi mais ninguém.";
+                return $"{LeanLocalization.GetTranslationText("Alibi/Answer/ViNinguem")}";
             }
             else if (characterNames.Count == 1)
             {
-                return $"Eu não vi {characterNames[0]}.";
+                return $"{LeanLocalization.GetTranslationText("Alibi/Answer/Base")} {characterNames[0]}.";
             }
             else
             {
-                string message = $"Eu não vi ";
+                string message = $"{LeanLocalization.GetTranslationText("Alibi/Answer/Base")} ";
                 for (int i = 0; i < characterNames.Count; i++)
                 {
                     if (i != characterNames.Count - 1)
@@ -197,7 +199,7 @@ public class CharacterData : MonoBehaviour
                     }
                     else
                     {
-                        message += $"e {characterNames[i]}.";
+                        message += $"{LeanLocalization.GetTranslationText("Generic/E")} {characterNames[i]}.";
                     }
                 }
                 return message;
@@ -256,7 +258,7 @@ public class CharacterData : MonoBehaviour
         {
             if (!willInformAboutRoomCompleteInformation)
             {
-                message += $" Eu não vi {murdererData.characterName}";
+                message += $" {LeanLocalization.GetTranslationText("Alibi/Answer/BaseNegative")} {murdererData.characterName}";
             }
         }
         return message;
