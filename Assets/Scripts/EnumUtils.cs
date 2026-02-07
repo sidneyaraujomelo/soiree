@@ -19,6 +19,6 @@ public static class EnumUtils
     public static List<T> TakeRandomFromEnumValues<T>(int n) where T : Enum
     {
         var values = Enum.GetValues(typeof(T)).Cast<T>().ToList();
-        return values.Take(n).ToList();
+        return values.Randomize().Take(n).ToList();
     }
 }
