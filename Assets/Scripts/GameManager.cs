@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
     int idMurderer;
     Dictionary<Alibi, List<CharacterData>> alibiCharacterDataDict;
 
+    //Intuition Graph
+    IntuitionGraph intuitionGraph;
+    [HideInInspector]
+    public bool hasIntuitionGraph = false;
+
     public bool isOnDialogue;
     public bool isOnBoard;
     public GameObject grayScreen;
@@ -168,13 +173,34 @@ public class GameManager : MonoBehaviour
                     .Randomize().Take(possibleRoomies.Count - numToRemove).Select(x=>x.characterName).ToList();
             }
         }
-        
+        intuitionGraph = new IntuitionGraph(characterDataDict.Keys.Append(deadCharacterName).ToList());
         foreach (CharacterData characterData in characterDataDict.Values)
         {
             characterData.GenerateAlibiMessage();
             characterData.GenerateOpinions();
             Debug.Log(characterData.ToString());
         }
+        hasIntuitionGraph = true;
+    }
+
+    public void RegisterOpinion(string source, string target, Opinion opinion)
+    {
+        this.intuitionGraph.AddWeight(source, target, GameGenerationRules.opinionValueDict[opinion]);
+    }
+
+    internal void RegisterRevealedOpinions(string source)
+    {
+        this.intuitionGraph.AddEdgesToAllTargets(source);
+    }
+
+    public void UpdateTrustCulprit(string characterName, int value)
+    {
+        intuitionGraph.SetMultiplier(characterName, value);
+    }
+
+    public List<string> GetIntuitionCulprits()
+    {
+        return this.intuitionGraph.GetIntuition(deadCharacterName);
     }
 
     public void StartDialogueWithCharacter(string characterName)
@@ -245,5 +271,10 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    internal IntuitionGraph GetIntuitionGraph()
+    {
+        return intuitionGraph;
     }
 }

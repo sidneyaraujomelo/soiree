@@ -104,6 +104,7 @@ public class CharacterData : MonoBehaviour
     void RevealOpinions()
     {
         this.revealedOpinions = true;
+        GameManager.Instance.RegisterRevealedOpinions(this.characterName);
         GameManager.Instance.UpdateUI(this);
     }
 
@@ -186,11 +187,11 @@ public class CharacterData : MonoBehaviour
             }
             else if (characterNames.Count == 1)
             {
-                return $"{LeanLocalization.GetTranslationText("Alibi/Answer/Base")} {characterNames[0]}.";
+                return $"{LeanLocalization.GetTranslationText("Alibi/Answer/BaseNegative")} {characterNames[0]}.";
             }
             else
             {
-                string message = $"{LeanLocalization.GetTranslationText("Alibi/Answer/Base")} ";
+                string message = $"{LeanLocalization.GetTranslationText("Alibi/Answer/BaseNegative")} ";
                 for (int i = 0; i < characterNames.Count; i++)
                 {
                     if (i != characterNames.Count - 1)
@@ -299,6 +300,7 @@ public class CharacterData : MonoBehaviour
     {
         List<Opinion> drawableOpinions = roleOpinionRelationship.drawableOpinion[Role.Morto];
         Opinion selectedOpinion = drawableOpinions[Random.Range(0, drawableOpinions.Count)];
+        GameManager.Instance.RegisterOpinion(this.characterName, GameManager.Instance.deadCharacterName, selectedOpinion);
         return GetOpinionDeadString(selectedOpinion, GameManager.Instance.deadCharacterName);
     }
 
@@ -314,6 +316,7 @@ public class CharacterData : MonoBehaviour
                 List<Opinion> drawableOpinions = roleOpinionRelationship.drawableOpinion[toOpinate.role];
                 Opinion selectedOpinion = drawableOpinions[Random.Range(0, drawableOpinions.Count)];
                 opinions.Add(GetOpinionString(selectedOpinion, toOpinate.characterName));
+                GameManager.Instance.RegisterOpinion(this.characterName, toOpinate.characterName, selectedOpinion);
             }
         }
         opinions.Add(GetMortoOpinion(roleOpinionRelationship));
@@ -342,12 +345,14 @@ public class CharacterData : MonoBehaviour
                 {
                     Opinion selectedOpinion = Opinion.Negativa;
                     opinions.Add(GetOpinionString(selectedOpinion, toOpinate.characterName));
+                    GameManager.Instance.RegisterOpinion(this.characterName, toOpinate.characterName, selectedOpinion);
                     firstAleatorio = false;
                 }
                 else
                 {
                     List<Opinion> drawableOpinions = roleOpinionRelationship.drawableOpinion[toOpinate.role];
                     Opinion selectedOpinion = drawableOpinions[Random.Range(0, drawableOpinions.Count)];
+                    GameManager.Instance.RegisterOpinion(this.characterName, toOpinate.characterName, selectedOpinion);
                     opinions.Add(GetOpinionString(selectedOpinion, toOpinate.characterName));
                 }
             }

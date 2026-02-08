@@ -93,6 +93,13 @@ public static class GameGenerationRules
         }
     };
 
+    public static Dictionary<Opinion, int> opinionValueDict = new Dictionary<Opinion, int>()
+    {
+        {Opinion.Positiva, 1},
+        {Opinion.Neutra, 0 },
+        {Opinion.Negativa, -1}
+    };
+
     public static int maxAlibis = 3;
     public static string GetAlibiString(Alibi alibi)
     {

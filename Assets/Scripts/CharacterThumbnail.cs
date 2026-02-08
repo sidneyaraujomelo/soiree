@@ -15,6 +15,7 @@ public class CharacterThumbnail : MonoBehaviour
     bool hasSetAlibiText;
     public TextMeshProUGUI opinionText;
     bool hasSetOpinionText;
+    public TrustMarker trustMarker;
 
     public void SetCharacterData(CharacterData characterData, Sprite characterThumbnail)
     {
@@ -49,5 +50,10 @@ public class CharacterThumbnail : MonoBehaviour
     public void Blame()
     {
         GameManager.Instance.Blame(characterData.characterName);
+    }
+
+    public void UpdateTrustMarker()
+    {
+        GameManager.Instance.UpdateTrustCulprit(this.characterData.characterName, trustMarker.GetCurrentMultipler());
     }
 }
