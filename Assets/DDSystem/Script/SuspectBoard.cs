@@ -1,6 +1,8 @@
 using Lean.Localization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +16,10 @@ public class SuspectBoard : MonoBehaviour
     public GameObject RightPage;
     public GameObject EndingScreen;
     public TextMeshProUGUI endingText;
+
+    //Intuition Panel
+    public GameObject intuitionButtonPanel;
+    public TextMeshProUGUI intuitionCulpritsLabel;
 
     public GameObject characterThumbnailPrefab;
     public GameObject deadCharacterThumbnailPrefab;
@@ -53,12 +59,13 @@ public class SuspectBoard : MonoBehaviour
         if (LeftPage.transform.childCount <= 3)
         {
             newCharacterThumbnail.transform.parent = LeftPage.transform;
+            newCharacterThumbnail.transform.SetAsLastSibling();
         }
         else
         {
             newCharacterThumbnail.transform.parent = RightPage.transform;
+            newCharacterThumbnail.transform.SetSiblingIndex(newCharacterThumbnail.transform.parent.childCount - 2);
         }
-        newCharacterThumbnail.transform.SetAsLastSibling();
         characterThumbnails.Add(character.characterName, thumbnailComponent);
     }
     public void UpdateCharacterThumbnail(CharacterData character)
@@ -87,5 +94,16 @@ public class SuspectBoard : MonoBehaviour
         EndingRoutine();
         endingText.text = LeanLocalization.GetTranslationText("Main/Board/Errou");
         Debug.Log("YOU DIED!");
+    }
+
+    public void ShowIntuitionResult(List<CharacterData> intuitionCulprits)
+    {
+        intuitionButtonPanel.gameObject.SetActive(false);
+        intuitionCulpritsLabel.gameObject.SetActive(true);
+        string base_string = intuitionCulprits.Any(x=>x.genderString == "M") ? 
+            LeanLocalization.GetTranslationText("Main/Board/IntuitionResultM") 
+            : LeanLocalization.GetTranslationText("Main/Board/IntuitionResultF");
+        List<string> intuitionCulpritsNames = intuitionCulprits.Select(x => x.characterName).ToList();
+        intuitionCulpritsLabel.text = base_string.Replace("{CHARACTER}", string.Join(LeanLocalization.GetTranslationText("Generic/Ou"), intuitionCulpritsNames));
     }
 }

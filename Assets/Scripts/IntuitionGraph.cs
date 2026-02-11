@@ -149,4 +149,25 @@ public class IntuitionGraph
             Debug.Log(line);
         }
     }
+
+    internal string GetGraphPrint()
+    {
+        int maxLength = "Intuition".Length;
+        string graphPrint = "".PadRight(maxLength)+"|"+string.Join("|", nodes.Select(x=>x.PadRight(maxLength)).ToList())+ "|\n";
+        List<int> currentIntuitionValues = new List<int>();
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            currentIntuitionValues.Add(0);
+            string line = $"{nodes[i].PadRight(maxLength)}|";
+            for (int j = 0; j < nodes.Count; j++)
+            {
+                string nextEdge = $"{edges[i,j]} ({weights[i, j]})";
+                line += nextEdge.PadRight(maxLength)+"|";
+                currentIntuitionValues[i] += nodeMultiplers[j] * weights[j, i] * edges[j, i];
+            }
+            graphPrint += line + "\n";   
+        }
+        graphPrint += "Intuition".PadRight(maxLength)+ "|"+string.Join("|", currentIntuitionValues.Select(x=>x.ToString().PadRight(maxLength)).ToList());
+        return graphPrint;
+    }
 }

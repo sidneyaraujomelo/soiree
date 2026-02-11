@@ -20,7 +20,7 @@ public class CharacterData : MonoBehaviour
     public List<string> opinionMessages;
     public bool revealedAlibi;
     public bool revealedOpinions;
-    string genderString;
+    public string genderString;
 
     public CharacterData(string characterName, Role role, EmotionalState emotionalState, Alibi alibi)
     {

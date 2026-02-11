@@ -1,4 +1,5 @@
 using Doublsb.Dialog;
+using Lean.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ using UnityEngine.TextCore.Text;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    [SerializeField]
+    GameObject LocalizationPrefab;
 
     public GameObject dialogManagerObject;
     public DialogManager dialogManager;
@@ -47,6 +50,12 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        if (LeanLocalization.Instances.Count == 0)
+        {
+            Instantiate(LocalizationPrefab);
+        }
+
         dialogManager = dialogManagerObject.GetComponent<DialogManager>();
         characterDataDict = new Dictionary<string, CharacterData>();
         alibiCharacterDataDict = new Dictionary<Alibi, List<CharacterData>>();
@@ -201,6 +210,13 @@ public class GameManager : MonoBehaviour
     public List<string> GetIntuitionCulprits()
     {
         return this.intuitionGraph.GetIntuition(deadCharacterName);
+    }
+
+    public void RealizeIntuition()
+    {
+        List<string> intuitionCulprits = GetIntuitionCulprits();
+        List<CharacterData> characters = characterDataDict.Values.Where(x=>intuitionCulprits.Contains(x.characterName)).ToList();
+        suspectBoard.ShowIntuitionResult(characters);
     }
 
     public void StartDialogueWithCharacter(string characterName)

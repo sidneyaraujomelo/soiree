@@ -520,6 +520,58 @@ MonoBehaviour:
   - Language: English
     Text: in the Music Room
     Object: {fileID: 0}
+--- !u!1 &1052979156364020422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6649294469737951928}
+  - component: {fileID: 5922656161996525852}
+  m_Layer: 0
+  m_Name: Main/Board/IntuitionResultM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6649294469737951928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052979156364020422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8470363177947128979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5922656161996525852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052979156364020422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Portuguese
+    Text: Talvez {CHARACTER} seja o culpado...
+    Object: {fileID: 0}
+  - Language: English
+    Text: Perhaps {CHARACTER} is the culprit...
+    Object: {fileID: 0}
 --- !u!1 &1090590146772111361
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +883,58 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: '{CHARACTER} has always been quite independent.'
+    Object: {fileID: 0}
+--- !u!1 &1896796615124404116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3989797944993432615}
+  - component: {fileID: 1731548040967343799}
+  m_Layer: 0
+  m_Name: Main/Board/IntuitionResultF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3989797944993432615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896796615124404116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8470363177947128979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1731548040967343799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896796615124404116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Portuguese
+    Text: Talvez {CHARACTER} seja a culpada...
+    Object: {fileID: 0}
+  - Language: English
+    Text: Perhaps {CHARACTER} is the culprit...
     Object: {fileID: 0}
 --- !u!1 &1925932206723099702
 GameObject:
@@ -1344,6 +1448,8 @@ Transform:
   - {fileID: 1774573318289412716}
   - {fileID: 6440933056524182344}
   - {fileID: 4338499783348317174}
+  - {fileID: 6649294469737951928}
+  - {fileID: 3989797944993432615}
   - {fileID: 6881616517565562459}
   - {fileID: 4405452469081975118}
   - {fileID: 4117695681134555748}
@@ -1413,6 +1519,7 @@ Transform:
   - {fileID: 5164146160873334265}
   - {fileID: 3439800078193107281}
   - {fileID: 1317834296371611650}
+  - {fileID: 8821892420476574500}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3820682355559156645
@@ -3422,6 +3529,58 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: in the Toilette
+    Object: {fileID: 0}
+--- !u!1 &7413547034768740593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8821892420476574500}
+  - component: {fileID: 8543057399073444424}
+  m_Layer: 0
+  m_Name: Generic/Ou
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8821892420476574500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413547034768740593}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8470363177947128979}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8543057399073444424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413547034768740593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: Portuguese
+    Text: ou
+    Object: {fileID: 0}
+  - Language: English
+    Text: or
     Object: {fileID: 0}
 --- !u!1 &7478418789650244283
 GameObject:
