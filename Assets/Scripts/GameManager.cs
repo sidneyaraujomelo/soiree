@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField]
-    GameObject LocalizationPrefab;
+    GameObject localizationPrefab;
+    [SerializeField]
+    GameObject audioManager;
 
     public GameObject dialogManagerObject;
     public DialogManager dialogManager;
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         if (LeanLocalization.Instances.Count == 0)
         {
-            Instantiate(LocalizationPrefab);
+            Instantiate(localizationPrefab);
         }
 
         dialogManager = dialogManagerObject.GetComponent<DialogManager>();
@@ -64,6 +66,14 @@ public class GameManager : MonoBehaviour
         GenerateAlibis();
         GenerateCharacterData();
         CreateUI();
+    }
+
+    private void Start()
+    {
+        if (AudioManager.instance == null)
+        {
+            Instantiate(audioManager);
+        }
     }
 
     void GenerateAlibis()

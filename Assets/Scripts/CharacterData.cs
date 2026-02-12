@@ -158,18 +158,9 @@ public class CharacterData : MonoBehaviour
                 string message = "";
                 if (nominal)
                 {
-                    message = LeanLocalization.GetTranslationText("Alibi/Answer/Base");
-                    for (int i = 0; i < characterNames.Count; i++)
-                    {
-                        if (i != characterNames.Count - 1)
-                        {
-                            message += $"{characterNames[i]}, ";
-                        }
-                        else
-                        {
-                            message += $"{LeanLocalization.GetTranslationText("Generic/E")} {characterNames[i]}.";
-                        }
-                    }
+                    message = LeanLocalization.GetTranslationText("Alibi/Answer/Base")+" ";
+                    message += string.Join(", ", characterNames.Take(characterNames.Count - 1));
+                    message += $" {LeanLocalization.GetTranslationText("Generic/E")} {characterNames[characterNames.Count - 1]}.";
                     return message;
                 }
                 else
@@ -192,17 +183,8 @@ public class CharacterData : MonoBehaviour
             else
             {
                 string message = $"{LeanLocalization.GetTranslationText("Alibi/Answer/BaseNegative")} ";
-                for (int i = 0; i < characterNames.Count; i++)
-                {
-                    if (i != characterNames.Count - 1)
-                    {
-                        message += $"{characterNames[i]}, ";
-                    }
-                    else
-                    {
-                        message += $"{LeanLocalization.GetTranslationText("Generic/E")} {characterNames[i]}.";
-                    }
-                }
+                message += string.Join(", ", characterNames.Take(characterNames.Count - 1));
+                message += $" {LeanLocalization.GetTranslationText("Generic/E")} {characterNames[characterNames.Count - 1]}.";
                 return message;
             }
         }

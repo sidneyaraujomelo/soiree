@@ -103,7 +103,7 @@ public class SuspectBoard : MonoBehaviour
         string base_string = intuitionCulprits.Any(x=>x.genderString == "M") ? 
             LeanLocalization.GetTranslationText("Main/Board/IntuitionResultM") 
             : LeanLocalization.GetTranslationText("Main/Board/IntuitionResultF");
-        List<string> intuitionCulpritsNames = intuitionCulprits.Select(x => x.characterName).ToList();
-        intuitionCulpritsLabel.text = base_string.Replace("{CHARACTER}", string.Join(LeanLocalization.GetTranslationText("Generic/Ou"), intuitionCulpritsNames));
+        List<string> intuitionCulpritsNames = intuitionCulprits.Select(x => $"<b>{x.characterName}</b>").ToList();
+        intuitionCulpritsLabel.text = base_string.Replace("{CHARACTER}", string.Join($" {LeanLocalization.GetTranslationText("Generic/Ou")} ", intuitionCulpritsNames));
     }
 }
