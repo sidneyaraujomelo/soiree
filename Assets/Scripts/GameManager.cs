@@ -1,4 +1,6 @@
+using DG.Tweening;
 using Doublsb.Dialog;
+using EasyTransition;
 using Lean.Localization;
 using System;
 using System.Collections;
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     GameObject localizationPrefab;
     [SerializeField]
     GameObject audioManager;
+    [SerializeField]
+    GameObject transitionLoadScenePrefab;
 
     public GameObject dialogManagerObject;
     public DialogManager dialogManager;
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
         GenerateAlibis();
         GenerateCharacterData();
         CreateUI();
+        DOTween.Init();
     }
 
     private void Start()
@@ -73,6 +78,11 @@ public class GameManager : MonoBehaviour
         if (AudioManager.instance == null)
         {
             Instantiate(audioManager);
+        }
+        if (TransitionLoadScene.instance == null)
+        {
+            Instantiate(transitionLoadScenePrefab);
+            InteractableManager.instance.PresentCharacters();
         }
     }
 
@@ -91,7 +101,11 @@ public class GameManager : MonoBehaviour
     public void SetOnDialog(bool value)
     {
         this.isOnDialogue = value;
-        grayScreen.SetActive(value);
+        if (!value)
+        {
+            InteractableManager.instance.PresentCharacters();
+            grayScreen.SetActive(value);
+        }
     }
 
     public void SetOnBoard(bool value)
@@ -197,7 +211,7 @@ public class GameManager : MonoBehaviour
         {
             characterData.GenerateAlibiMessage();
             characterData.GenerateOpinions();
-            Debug.Log(characterData.ToString());
+            //Debug.Log(characterData.ToString());
         }
         hasIntuitionGraph = true;
     }
@@ -233,7 +247,21 @@ public class GameManager : MonoBehaviour
     {
         CharacterData characterData = characterDataDict[characterName];
         List<DialogData> dialogData = characterData.GenerateDialogData();
-        dialogManager.Show(dialogData);
+        StartCoroutine(StartDialogue(dialogData));
+    }
+
+    IEnumerator StartDialogue(List<DialogData> dialogData)
+    {
+        InteractableManager.instance.HideCharacters();
+        ShowGrayScreen();
+        yield return new WaitForSeconds(0.5f);
+        dialogManager.Show(dialogData, true);
+    }
+
+    void ShowGrayScreen()
+    {
+        grayScreen.SetActive(true);
+        grayScreen.GetComponent<SpriteRenderer>().DOColor(new Color(0, 0, 0, 0), 0.5f).From().Play();
     }
 
     // Update is called once per frame
@@ -296,7 +324,7 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        TransitionLoadScene.instance.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     internal IntuitionGraph GetIntuitionGraph()

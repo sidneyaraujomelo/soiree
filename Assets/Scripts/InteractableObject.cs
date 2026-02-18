@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,14 +50,37 @@ public class InteractableObject : MonoBehaviour
     }
     public Color outlineColor;
 
-    bool shouldInteract => !GameManager.Instance.isOnDialogue && !GameManager.Instance.isOnBoard;
+    bool shouldInteract => !GameManager.Instance.isOnDialogue && !GameManager.Instance.isOnBoard && hasBeenPresented;
 
     public List<UnityEvent> onClickEvents;
+
+    private Vector3 startPosition;
+    private Vector3 hiddenPosition;
+    bool hasBeenPresented = false;
 
     // Start is called before the first frame update
     void Start()
     {
         outline.outlineColor = outlineColor;
+    }
+
+    private void Awake()
+    {
+        startPosition = this.transform.localPosition;
+        //Debug.Log(startPosition);
+        this.transform.localPosition = new Vector3(-14, startPosition.y, startPosition.z);
+        hiddenPosition = this.transform.localPosition;
+        //Debug.Log(this.transform.localPosition);
+    }
+
+    public void Present(float duration, float delay)
+    {
+        transform.DOLocalMove(startPosition, duration).SetDelay(delay).SetEase(Ease.Flash).Play().OnComplete(() => { hasBeenPresented = true; });   
+    }
+
+    public void Hide(float duration, float delay)
+    {
+        transform.DOLocalMove(hiddenPosition, duration).SetDelay(delay).SetEase(Ease.Flash).Play();
     }
 
     // Update is called once per frame

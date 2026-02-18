@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using DG.Tweening;
 
 namespace Doublsb.Dialog
 {
@@ -65,6 +66,7 @@ namespace Doublsb.Dialog
         //Private Method
         //================================================
         private Character _current_Character;
+        private Character _last_Character;
         private DialogData _current_Data;
 
         private float _currentDelay;
@@ -76,10 +78,12 @@ namespace Doublsb.Dialog
         //Public Method
         //================================================
         #region Show & Hide
-        public void Show(DialogData Data)
+        public void Show(DialogData Data, bool firstData=false)
         {
-            if (GameManager.Instance != null)
-                GameManager.Instance.SetOnDialog(true);
+            if (firstData)
+            {
+                SetStartedDialogue();
+            }
             _current_Data = Data;
             _find_character(Data.Character);
 
@@ -89,10 +93,12 @@ namespace Doublsb.Dialog
             _textingRoutine = StartCoroutine(Activate());
         }
 
-        public void Show(List<DialogData> Data)
+        public void Show(List<DialogData> Data, bool firstData=false)
         {
-            if (GameManager.Instance!=null)
-                GameManager.Instance.isOnDialogue = true;
+            if (firstData)
+            {
+                SetStartedDialogue();
+            }
             StartCoroutine(Activate_List(Data));
         }
 
@@ -117,20 +123,45 @@ namespace Doublsb.Dialog
                 StopCoroutine(_printingRoutine);
 
             Printer.SetActive(false);
-            Characters.SetActive(false);
             Selector.SetActive(false);
 
             state = State.Deactivate;
 
-            if (GameManager.Instance != null)
-                GameManager.Instance.SetOnDialog(false);
+            /*if (GameManager.Instance != null)
+                GameManager.Instance.SetOnDialog(false);*/
 
             if (_current_Data.Callback != null)
             {
                 _current_Data.Callback.Invoke();
-                _current_Data.Callback = null;
+                //_current_Data.Callback = null;
             }
         }
+
+        public void SetStartedDialogue()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.SetOnDialog(true);
+            _last_Character = null;
+        }
+
+        public void SetEndedDialogue()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.SetOnDialog(false);
+            DeactivateCharacters();
+        }
+
+        void DeactivateCharacters()
+        {
+            if (_current_Character == null) return;
+            Image _currentCharacterImage = _current_Character.gameObject.GetComponent<Image>();
+            _currentCharacterImage.DOFade(0, 0.25f).Play().OnComplete(() => {
+                _currentCharacterImage.color = Color.white;
+                _currentCharacterImage.gameObject.SetActive(false);
+                Characters.SetActive(false);  
+            });
+        }
+
         #endregion
 
         #region Selector
@@ -218,9 +249,20 @@ namespace Doublsb.Dialog
 
             Printer.SetActive(true);
 
-            Characters.SetActive(_current_Character != null);
-            foreach (Transform item in Characters.transform) item.gameObject.SetActive(false);
-            if(_current_Character != null) _current_Character.gameObject.SetActive(true);
+            if (_current_Character != _last_Character)
+            {
+                _last_Character = _current_Character;
+                Characters.SetActive(_current_Character != null);
+                foreach (Transform item in Characters.transform) item.gameObject.SetActive(false);
+                if (_current_Character != null) ShowCurrentCharacter();
+            }
+        }
+
+        void ShowCurrentCharacter()
+        {
+            _current_Character.gameObject.SetActive(true);
+            _current_Character.GetComponent<Image>().DOFade(0, 0.5f).From().Play();
+            _last_Character = _current_Character;
         }
 
         private void _init_selector()
@@ -262,7 +304,6 @@ namespace Doublsb.Dialog
         private IEnumerator Activate_List(List<DialogData> DataList)
         {
             state = State.Active;
-
             foreach (var Data in DataList)
             {
                 Show(Data);

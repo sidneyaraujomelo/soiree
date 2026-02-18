@@ -113,17 +113,19 @@ public class CharacterData : MonoBehaviour
         if (GameManager.Instance.dialogManager.Result == "Alibi")
         {
             var dialogTexts = new List<DialogData>();
-            dialogTexts.Add(new DialogData(this.alibiMessage, this.characterName));
+            dialogTexts.Add(new DialogData(this.alibiMessage, this.characterName, () => { GameManager.Instance.dialogManager.SetEndedDialogue(); }));
             GameManager.Instance.dialogManager.Show(dialogTexts);
             RevealAlibi();
         }
         else if (GameManager.Instance.dialogManager.Result == "Opiniao")
         {
             var dialogTexts = new List<DialogData>();
-            for (int i = 0; i < this.opinionMessages.Count; i++)
+            int i = 0;
+            for (i = 0; i < this.opinionMessages.Count-1; i++)
             {
                 dialogTexts.Add(new DialogData(opinionMessages[i], this.characterName));
             }
+            dialogTexts.Add(new DialogData(opinionMessages[i], this.characterName, () => { GameManager.Instance.dialogManager.SetEndedDialogue(); }));
             RevealOpinions();
             GameManager.Instance.dialogManager.Show(dialogTexts);
         }
