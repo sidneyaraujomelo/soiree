@@ -19,6 +19,7 @@ public class SuspectBoard : MonoBehaviour
 
     //Intuition Panel
     public GameObject intuitionButtonPanel;
+    public GameObject intuitionTutorialPanel;
     public TextMeshProUGUI intuitionCulpritsLabel;
 
     public GameObject characterThumbnailPrefab;
@@ -93,12 +94,13 @@ public class SuspectBoard : MonoBehaviour
     {
         EndingRoutine();
         endingText.text = LeanLocalization.GetTranslationText("Main/Board/Errou");
-        Debug.Log("YOU DIED!");
+        Debug.Log($"YOU DIED! {GameManager.Instance.GetMurdererData().name}");
     }
 
     public void ShowIntuitionResult(List<CharacterData> intuitionCulprits)
     {
         intuitionButtonPanel.gameObject.SetActive(false);
+        intuitionTutorialPanel.gameObject.SetActive(false);
         intuitionCulpritsLabel.gameObject.SetActive(true);
         string base_string = intuitionCulprits.Any(x=>x.genderString == "M") ? 
             LeanLocalization.GetTranslationText("Main/Board/IntuitionResultM") 

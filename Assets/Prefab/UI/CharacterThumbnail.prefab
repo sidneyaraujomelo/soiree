@@ -296,7 +296,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 154.4, y: -78.202}
-  m_SizeDelta: {x: 307.1712, y: 65.1225}
+  m_SizeDelta: {x: 307.1712, y: 71.798}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8034097999094920613
 CanvasRenderer:
@@ -328,8 +328,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Eu estava na cozinha e n\xE3o vi ningu\xE9m."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f185c11bcbf49440bc59abf60e6960a, type: 2}
+  m_sharedMaterial: {fileID: -1988920366901944398, guid: 4f185c11bcbf49440bc59abf60e6960a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -462,8 +462,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Corotinho
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f185c11bcbf49440bc59abf60e6960a, type: 2}
+  m_sharedMaterial: {fileID: -1988920366901944398, guid: 4f185c11bcbf49440bc59abf60e6960a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -541,6 +541,8 @@ GameObject:
   - component: {fileID: 794589056437721753}
   - component: {fileID: 476861600774518410}
   - component: {fileID: 5592996431847439719}
+  - component: {fileID: 6677707167633347606}
+  - component: {fileID: 4571038430938976020}
   m_Layer: 5
   m_Name: BlameButton
   m_TagString: Untagged
@@ -625,7 +627,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -662,6 +664,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &6677707167633347606
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411391899379490181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 839de3da73627a04cb34d44ed8acaed8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4571038430938976020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411391899379490181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e1d8eeb104d7349bc872e603562bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
+  onHighlightedSfx: {fileID: 8300000, guid: 02e593b59035ef64488f54568204fbfe, type: 3}
+  onPressedSfx: {fileID: 8300000, guid: 7acff2f10f48bd7429230f52d65c8874, type: 3}
 --- !u!1 &5666474898689044396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,8 +1068,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Eu estava na cozinha e n\xE3o vi ningu\xE9m."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f185c11bcbf49440bc59abf60e6960a, type: 2}
+  m_sharedMaterial: {fileID: -1988920366901944398, guid: 4f185c11bcbf49440bc59abf60e6960a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

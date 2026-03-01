@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
     public void SetOnDialog(bool value)
     {
         this.isOnDialogue = value;
+        suspectBoard.openButton.SetActive(!value);
         if (!value)
         {
             InteractableManager.instance.PresentCharacters();

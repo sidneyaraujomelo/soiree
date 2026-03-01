@@ -58,6 +58,10 @@ public class InteractableObject : MonoBehaviour
     private Vector3 hiddenPosition;
     bool hasBeenPresented = false;
 
+    public AudioClip hoverInteractableSfx;
+    public AudioClip moveInteractableSfx;
+    public AudioClip clickInteractableSfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +79,9 @@ public class InteractableObject : MonoBehaviour
 
     public void Present(float duration, float delay)
     {
-        transform.DOLocalMove(startPosition, duration).SetDelay(delay).SetEase(Ease.Flash).Play().OnComplete(() => { hasBeenPresented = true; });   
+        transform.DOLocalMove(startPosition, duration).SetDelay(delay).SetEase(Ease.Flash).Play()
+            .OnStart(()=>PlayMoveInteractableSfx())
+            .OnComplete(() => { hasBeenPresented = true; });   
     }
 
     public void Hide(float duration, float delay)
@@ -95,6 +101,7 @@ public class InteractableObject : MonoBehaviour
         {
             //Add Outline with color
             outline.EnableOutline();
+            PlayHoverInteractableSfx();
         }
     }
 
@@ -118,5 +125,19 @@ public class InteractableObject : MonoBehaviour
             unityEvent.Invoke();
             outline.DisableOutline();
         }
+    }
+    public void PlayHoverInteractableSfx()
+    {
+        AudioManager.instance.PlaySFX(hoverInteractableSfx);
+    }
+
+    public void PlayMoveInteractableSfx()
+    {
+        AudioManager.instance.PlaySFX(moveInteractableSfx);
+    }
+
+    public void PlayClickInteractableSfx()
+    {
+        AudioManager.instance.PlaySFX(clickInteractableSfx);
     }
 }
